@@ -1,4 +1,4 @@
-import React from 'react'
+import PropTypes from 'prop-types'
 
 export const GitItem = ({title,url}) => {
   return (
@@ -7,4 +7,9 @@ export const GitItem = ({title,url}) => {
         <p>{title}</p>    
     </div>
   )
+}
+//The title, url are required
+GitItem.propTypes ={
+  title: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired
 }
