@@ -15,7 +15,10 @@ describe('Test in <AddCategory/>', () => {
 
     test('should call OnNewCategory, if the imput has a value', () => { 
         const inputValue = 'naruto'
-        render(<AddCategory onNewCategory={()=>{}}/>)
+
+        const onNewCategory = jest.fn()
+
+        render(<AddCategory onNewCategory={onNewCategory    }/>)
         const input = screen.getByRole('textbox')
         const form  = screen.getByRole('form')
         //Dispatch Event
@@ -25,5 +28,18 @@ describe('Test in <AddCategory/>', () => {
     
         //screen.debug()
         expect( input.value ).toBe('')
+
+        expect( onNewCategory).toHaveBeenCalled()
+        expect( onNewCategory).toBeCalledTimes(1)
+        expect( onNewCategory).toHaveBeenCalledWith( inputValue )
+   
+    })
+
+    test('should not call the Function OnNewCategory if input Component Empty', () => { 
+        const onNewCategory = jest.fn()
+        render(<AddCategory onNewCategory={onNewCategory}/>)
+        expect ( onNewCategory ).toHaveBeenCalledTimes(0)
+        expect ( onNewCategory).not.toBeCalled()
+    
     })
  })
